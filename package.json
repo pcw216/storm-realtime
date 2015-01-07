@@ -1,0 +1,39 @@
+{
+  "name": "storm-realtime",
+  "version": "0.0.0",
+  "description": "The best module ever.",
+  "homepage": "https://github.com//storm-realtime",
+  "bugs": "https://github.com//storm-realtime/issues",
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//storm-realtime"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "scripts": {
+    "postinstall": "lein uberjar"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.0"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "coffee": "0.0.1",
+    "coffee-script": "^1.8.0",
+    "java": "^0.4.4",
+    "lodash": "^2.4.1",
+    "node-java": "^1.0.1",
+    "node-storm": "0.0.0",
+    "q": "^1.1.2",
+    "winston": "^0.8.3"
+  }
+}
