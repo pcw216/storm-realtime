@@ -7,8 +7,7 @@ _ = require('lodash')
 module.exports = 
 	bolt: ()->
 		client = null
-		bolt = storm.asyncbolt (data, callback)->
-			# @log(['lastChangeMessage'])
+		bolt = storm.oncebolt (data, callback)->
 			client ?= redis.createClient()
 
 			[message] = data.tuple
@@ -17,7 +16,6 @@ module.exports =
 			
 
 			async.eachLimit(_.keys(message.entities), 1, (uuid, callback)=>
-				# @log([uuid])
 				entity = message.entities[uuid]
 				type = entity.scope.match(SCOPE)[1]
 				client.multi()
