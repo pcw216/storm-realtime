@@ -2,10 +2,7 @@ storm = require('node-storm')
 async = require('async')
 _ = require('lodash')
 
-getCollection = ()->
-	index = false
-	return mongo().collection('changesByEntity')
-
+SCOPE = /^\/alm-.+\/(.+)$/
 
 module.exports = 
 	bolt: ()->
@@ -17,10 +14,16 @@ module.exports =
 			
 			async.eachLimit(_.keys(message.entities), 1, (uuid, callback)=>
 				entity = message.entities[uuid]
-				change = _.extend({server, timestamp}, entity)
-				@emit [{uuid}, change]
-			
+				transaction = _.extend({server, timestamp}, entity)
+				transaction.changes = []
+				transaction.type = entity.scope.match(SCOPE)[1]
+
+				for uuid, change of entity.changes
+					transaction.changes.push _.extend(change, {uuid})
+
+				@emit [{uuid}, transaction]
+				callback()
 			, callback)
 
-		bolt.declareOutputFields ['key', 'change']
+		bolt.declareOutputFields ['key', 'transaction']
 		return bolt

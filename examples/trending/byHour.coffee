@@ -16,6 +16,7 @@ module.exports =
 				type: 'hour'
 
 			@emit [theWindow, key, change]
+			callback()
 
 		bolt.declareOutputFields ['window', 'key', 'change']
 		return bolt
