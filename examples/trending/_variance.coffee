@@ -11,8 +11,8 @@ getCollection = (collectionName='variance')->
 	return mongo().collection(collectionName)
 
 module.exports = 
-	# reset the variance
-	reset: ()->
+	# recalc variance for a time period
+	recalc: ()->
 		bolt = storm.oncebolt (data, callback)->
 			[timeWindow, key] = data.tuple
 
